@@ -12,34 +12,49 @@ export default function Home() {
       </section>
 
       {/* BG1 */}
-      <section
-        className="w-full h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg1.png')" }}
-      ></section>
+      <section className="w-full h-screen flex justify-center items-center">
+        <img
+          src="/bg1.png"
+          alt="bg1"
+          className="w-auto h-full object-contain select-none"
+        />
+      </section>
 
       {/* BG2 */}
-      <section
-        className="w-full h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg2.png')" }}
-      ></section>
+      <section className="w-full h-screen flex justify-center items-center">
+        <img
+          src="/bg2.png"
+          alt="bg2"
+          className="w-auto h-full object-contain select-none"
+        />
+      </section>
 
       {/* BG3 */}
-      <section
-        className="w-full h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg3.png')" }}
-      ></section>
+      <section className="w-full h-screen flex justify-center items-center">
+        <img
+          src="/bg3.png"
+          alt="bg3"
+          className="w-auto h-full object-contain select-none"
+        />
+      </section>
 
       {/* BG4 */}
-      <section
-        className="w-full h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg4.png')" }}
-      ></section>
+      <section className="w-full h-screen flex justify-center items-center">
+        <img
+          src="/bg4.png"
+          alt="bg4"
+          className="w-auto h-full object-contain select-none"
+        />
+      </section>
 
       {/* BG5 */}
-      <section
-        className="w-full h-screen bg-cover bg-center"
-        style={{ backgroundImage: "url('/bg5.png')" }}
-      ></section>
+      <section className="w-full h-screen flex justify-center items-center">
+        <img
+          src="/bg5.png"
+          alt="bg5"
+          className="w-auto h-full object-contain select-none"
+        />
+      </section>
 
     </main>
   );
