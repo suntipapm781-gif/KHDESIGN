@@ -32,6 +32,7 @@ export default function RootLayout({ children }) {
               <a href="/sticker" className="hover:opacity-70">สติกเกอร์</a>
               <a href="/drawing" className="hover:opacity-70">งานวาด</a>
               <a href="/faq" className="hover:opacity-70">คำถามที่พบบ่อย</a>
+              <a href="/review" className="hover:opacity-70">รีวิว</a>
               <a href="/contact" className="hover:opacity-70">ติดต่อเรา</a>
             </nav>
 
