@@ -1,29 +1,27 @@
 export default function Home() {
   return (
-    <main className="p-8 max-w-3xl mx-auto text-center">
-      <h1 className="text-4xl font-bold mb-4">
-        KHDESIGN – ร้านออกแบบเสื้อและสติกเกอร์
-      </h1>
+    <main className="w-full min-h-screen bg-black text-white flex flex-col items-center">
 
-      <p className="text-lg mb-6">
-        รับออกแบบเสื้อ สติกเกอร์ และงานกราฟิกทุกชนิด  
-        สร้างงานใหม่ตามความต้องการลูกค้า
-      </p>
+      {/* HERO IMAGE */}
+      <div className="w-full flex justify-center mt-10 select-none">
+        <img
+          src="/hero.png"
+          alt="KHDESIGN Collection"
+          className="max-w-[1200px] w-full h-auto"
+        />
+      </div>
 
-      <div className="flex gap-4 justify-center">
-        <a
-          href="/gallery"
-          className="px-6 py-3 bg-black text-white rounded-lg hover:bg-gray-800"
-        >
-          ดูผลงาน
-        </a>
+      {/* Scroll Down Indicator */}
+      <a
+        href="#more"
+        className="mt-10 text-gray-400 hover:text-white text-sm"
+      >
+        เลื่อนลง
+      </a>
 
-        <a
-          href="/contact"
-          className="px-6 py-3 border border-black rounded-lg hover:bg-gray-100"
-        >
-          ติดต่อร้าน
-        </a>
+      {/* Bottom Section */}
+      <div id="more" className="w-full h-[100vh] flex items-center justify-center text-gray-500">
+        (พื้นที่สำหรับข้อมูลเพิ่มเติมหรือคอลเลกชันอื่น ๆ)
       </div>
     </main>
   );
