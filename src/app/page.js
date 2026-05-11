@@ -1,28 +1,46 @@
 export default function Home() {
   return (
-    <main className="w-full min-h-screen bg-black text-white flex flex-col items-center">
+    <main className="w-full bg-black text-white">
 
       {/* HERO IMAGE */}
-      <div className="w-full flex justify-center mt-10 select-none">
+      <section className="w-full h-screen flex justify-center items-center">
         <img
           src="/hero.png"
           alt="KHDESIGN Collection"
-          className="max-w-[1200px] w-full h-auto"
+          className="max-w-[1200px] w-full h-auto select-none"
         />
-      </div>
+      </section>
 
-      {/* Scroll Down Indicator */}
-      <a
-        href="#more"
-        className="mt-10 text-gray-400 hover:text-white text-sm"
-      >
-        เลื่อนลง
-      </a>
+      {/* BG1 */}
+      <section
+        className="w-full h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg1.png')" }}
+      ></section>
 
-      {/* Bottom Section */}
-      <div id="more" className="w-full h-[100vh] flex items-center justify-center text-gray-500">
-        (พื้นที่สำหรับข้อมูลเพิ่มเติมหรือคอลเลกชันอื่น ๆ)
-      </div>
+      {/* BG2 */}
+      <section
+        className="w-full h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg2.png')" }}
+      ></section>
+
+      {/* BG3 */}
+      <section
+        className="w-full h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg3.png')" }}
+      ></section>
+
+      {/* BG4 */}
+      <section
+        className="w-full h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg4.png')" }}
+      ></section>
+
+      {/* BG5 */}
+      <section
+        className="w-full h-screen bg-cover bg-center"
+        style={{ backgroundImage: "url('/bg5.png')" }}
+      ></section>
+
     </main>
   );
 }
