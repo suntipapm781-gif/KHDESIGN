@@ -4,7 +4,7 @@ export default function Cotton() {
       <section className="w-full overflow-hidden">
         <img
           src="/bg3.png"
-          alt="เสื้อพิมพ์ลาย"
+          alt="เสื้อคอตตอน"
           className="w-full h-auto block select-none"
         />
       </section>
