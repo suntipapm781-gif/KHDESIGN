@@ -3,7 +3,7 @@ export default function ShirtPrint() {
     <main className="w-full bg-black">
       <section className="w-full overflow-hidden">
         <img
-          src="/hero.png"
+          src="/bg2.png"
           alt="เสื้อพิมพ์ลาย"
           className="w-full h-auto block select-none"
         />
