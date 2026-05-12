@@ -4,7 +4,7 @@ export default function Drawing() {
       <section className="w-full overflow-hidden">
         <img
           src="/bg5.png"
-          alt="เสื้อพิมพ์ลาย"
+          alt="งานวาด"
           className="w-full h-auto block select-none"
         />
       </section>
