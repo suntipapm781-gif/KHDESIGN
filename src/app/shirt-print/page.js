@@ -7,9 +7,6 @@ export default function ShirtPrint() {
         หน้านี้สำหรับโชว์ผลงานเสื้อพิมพ์ลาย สามารถเพิ่มรูปผลงานลงได้ภายหลัง
       </p>
     
-        <main className="w-full bg-black text-white">
-
-
       <div className="h-48 bg-gray-200 flex items-center justify-center rounded-lg">
         <span className="text-gray-500">ยังไม่มีรูปผลงาน</span>
       </div>
