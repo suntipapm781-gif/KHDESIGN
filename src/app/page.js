@@ -56,6 +56,44 @@ export default function Home() {
         />
       </section>
 
+            {/* AUTO SLIDE SECTION */}
+<section className="w-full bg-black py-10">
+  <div className="w-full flex justify-center">
+    <img
+      id="autoSlideImage"
+      src="/bg1.png"
+      alt="slide"
+      className="w-full max-w-[1200px] h-auto object-contain select-none transition-opacity duration-700"
+    />
+  </div>
+</section>
+
+<script
+  dangerouslySetInnerHTML={{
+    __html: `
+      let index = 1;
+      const images = [
+        "/bg1.png",
+        "/bg2.png",
+        "/bg3.png",
+        "/bg4.png",
+        "/bg5.png"
+      ];
+      const imgEl = document.getElementById("autoSlideImage");
+
+      setInterval(() => {
+        index = (index + 1) % images.length;
+        imgEl.style.opacity = 0;
+        setTimeout(() => {
+          imgEl.src = images[index];
+          imgEl.style.opacity = 1;
+        }, 400);
+      }, 3500);
+    `,
+  }}
+/>
+
+
     </main>
   );
 }
