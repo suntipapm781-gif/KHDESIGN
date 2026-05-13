@@ -25,16 +25,24 @@ export default function RootLayout({ children }) {
             </a>
 
             {/* เมนู — จัดไว้ตรงกลางจริง ๆ */}
-            <nav className="flex-1 flex justify-center gap-8 text-lg">
-              <a href="/" className="hover:opacity-70">หน้าแรก</a>
-              <a href="/shirt-print" className="hover:opacity-70">เสื้อพิมพ์ลาย</a>
-              <a href="/cotton" className="hover:opacity-70">เสื้อ Cotton</a>
-              <a href="/sticker" className="hover:opacity-70">สติกเกอร์</a>
-              <a href="/drawing" className="hover:opacity-70">งานวาด</a>
-              <a href="/faq" className="hover:opacity-70">คำถามที่พบบ่อย</a>
-              <a href="/review" className="hover:opacity-70">รีวิว</a>
-              <a href="/contact" className="hover:opacity-70">ติดต่อเรา</a>
-            </nav>
+<nav
+  className="
+    flex-1 flex justify-center gap-8 text-lg
+    overflow-x-auto whitespace-nowrap
+    scrollbar-hide
+    md:overflow-visible md:whitespace-normal
+  "
+>
+  <a href="/" className="hover:opacity-70">หน้าแรก</a>
+  <a href="/shirt-print" className="hover:opacity-70">เสื้อพิมพ์ลาย</a>
+  <a href="/cotton" className="hover:opacity-70">เสื้อ Cotton</a>
+  <a href="/sticker" className="hover:opacity-70">สติกเกอร์</a>
+  <a href="/drawing" className="hover:opacity-70">งานวาด</a>
+  <a href="/faq" className="hover:opacity-70">คำถามที่พบบ่อย</a>
+  <a href="/review" className="hover:opacity-70">รีวิว</a>
+  <a href="/contact" className="hover:opacity-70">ติดต่อเรา</a>
+</nav>
+
 
             {/* กล่องค้นหาขวาสุด */}
             <div className="flex items-center">
@@ -53,6 +61,15 @@ export default function RootLayout({ children }) {
 
         {/* เนื้อหาหน้าแต่ละหน้า */}
         {children}
+
+  .scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 
       </body>
     </html>
