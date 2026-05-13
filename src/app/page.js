@@ -69,22 +69,10 @@ export default function Home() {
 
 
 
-/* -----------------------------
-   FULLSCREEN SLIDER COMPONENT
--------------------------------- */
-
 function FullscreenSlider() {
   const images = ["/bg1.png", "/bg2.png", "/bg3.png", "/bg4.png", "/bg5.png"];
   const [index, setIndex] = useState(0);
   const startX = useRef(0);
-
-  // Auto Slide
-  useEffect(() => {
-    const interval = setInterval(() => {
-      next();
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [index]);
 
   const next = () => {
     setIndex((prev) => (prev + 1) % images.length);
@@ -94,7 +82,13 @@ function FullscreenSlider() {
     setIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  // Touch for mobile swipe
+  // Auto slide
+  useEffect(() => {
+    const interval = setInterval(next, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Touch swipe
   const onTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
   };
@@ -103,22 +97,32 @@ function FullscreenSlider() {
     const endX = e.changedTouches[0].clientX;
     const diff = startX.current - endX;
 
-    if (diff > 50) next();     // swipe left
-    if (diff < -50) prev();    // swipe right
+    if (diff > 50) next();
+    if (diff < -50) prev();
   };
 
   return (
     <section
-      className="relative w-full h-screen bg-black overflow-hidden select-none"
+      className="relative w-full h-screen overflow-hidden bg-black"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* IMAGE */}
-      <img
-        key={index}
-        src={images[index]}
-        className="absolute inset-0 w-full h-full object-contain transition-opacity duration-700"
-      />
+      {/* Slide Track */}
+      <div
+        className="flex w-full h-full transition-transform duration-[700ms] ease-out"
+        style={{
+          transform: `translateX(-${index * 100}%)`,
+        }}
+      >
+        {images.map((src, i) => (
+          <div key={i} className="w-full h-full flex-shrink-0 flex justify-center items-center">
+            <img
+              src={src}
+              className="w-full h-full object-contain select-none"
+            />
+          </div>
+        ))}
+      </div>
 
       {/* LEFT BUTTON */}
       <button
@@ -138,3 +142,4 @@ function FullscreenSlider() {
     </section>
   );
 }
+
