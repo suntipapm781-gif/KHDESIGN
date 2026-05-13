@@ -70,7 +70,7 @@ export default function Home() {
 
 
 function FullscreenSlider() {
-  const baseImages = ["/bg1.png", "/bg2.png", "/bg3.png", "/bg4.png", "/bg5.png"];
+  const baseImages = ["/slide1.png", "/slide2.png", "/slide3.png", "/slide4.png", "/slide5.png"];
 
   // เพิ่มภาพแรกซ้ำท้ายสุดเพื่อทำ loop
   const images = [...baseImages, baseImages[0]];
