@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useState, useRef } from "react";
+
 export default function Home() {
   return (
     <main className="w-full bg-black text-white">
@@ -12,7 +16,7 @@ export default function Home() {
       </section>
 
       {/* BG1 */}
-      <section className="w-full">
+      <section className="w-full overflow-hidden">
         <img
           src="/bg1.png"
           alt="bg1"
@@ -21,7 +25,7 @@ export default function Home() {
       </section>
 
       {/* BG2 */}
-      <section className="w-full">
+      <section className="w-full overflow-hidden">
         <img
           src="/bg2.png"
           alt="bg2"
@@ -30,7 +34,7 @@ export default function Home() {
       </section>
 
       {/* BG3 */}
-      <section className="w-full">
+      <section className="w-full overflow-hidden">
         <img
           src="/bg3.png"
           alt="bg3"
@@ -39,7 +43,7 @@ export default function Home() {
       </section>
 
       {/* BG4 */}
-      <section className="w-full">
+      <section className="w-full overflow-hidden">
         <img
           src="/bg4.png"
           alt="bg4"
@@ -48,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* BG5 */}
-      <section className="w-full">
+      <section className="w-full overflow-hidden">
         <img
           src="/bg5.png"
           alt="bg5"
@@ -56,44 +60,81 @@ export default function Home() {
         />
       </section>
 
-            {/* AUTO SLIDE SECTION */}
-<section className="w-full bg-black py-10">
-  <div className="w-full flex justify-center">
-    <img
-      id="autoSlideImage"
-      src="/bg1.png"
-      alt="slide"
-      className="w-full max-w-[1200px] h-auto object-contain select-none transition-opacity duration-700"
-    />
-  </div>
-</section>
-
-<script
-  dangerouslySetInnerHTML={{
-    __html: `
-      let index = 1;
-      const images = [
-        "/bg1.png",
-        "/bg2.png",
-        "/bg3.png",
-        "/bg4.png",
-        "/bg5.png"
-      ];
-      const imgEl = document.getElementById("autoSlideImage");
-
-      setInterval(() => {
-        index = (index + 1) % images.length;
-        imgEl.style.opacity = 0;
-        setTimeout(() => {
-          imgEl.src = images[index];
-          imgEl.style.opacity = 1;
-        }, 400);
-      }, 3500);
-    `,
-  }}
-/>
-
+      {/* FULLSCREEN SLIDER */}
+      <FullscreenSlider />
 
     </main>
+  );
+}
+
+
+
+/* -----------------------------
+   FULLSCREEN SLIDER COMPONENT
+-------------------------------- */
+
+function FullscreenSlider() {
+  const images = ["/bg1.png", "/bg2.png", "/bg3.png", "/bg4.png", "/bg5.png"];
+  const [index, setIndex] = useState(0);
+  const startX = useRef(0);
+
+  // Auto Slide
+  useEffect(() => {
+    const interval = setInterval(() => {
+      next();
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [index]);
+
+  const next = () => {
+    setIndex((prev) => (prev + 1) % images.length);
+  };
+
+  const prev = () => {
+    setIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
+
+  // Touch for mobile swipe
+  const onTouchStart = (e) => {
+    startX.current = e.touches[0].clientX;
+  };
+
+  const onTouchEnd = (e) => {
+    const endX = e.changedTouches[0].clientX;
+    const diff = startX.current - endX;
+
+    if (diff > 50) next();     // swipe left
+    if (diff < -50) prev();    // swipe right
+  };
+
+  return (
+    <section
+      className="relative w-full h-screen bg-black overflow-hidden select-none"
+      onTouchStart={onTouchStart}
+      onTouchEnd={onTouchEnd}
+    >
+      {/* IMAGE */}
+      <img
+        key={index}
+        src={images[index]}
+        className="absolute inset-0 w-full h-full object-contain transition-opacity duration-700"
+      />
+
+      {/* LEFT BUTTON */}
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white px-4 py-2 rounded-full"
+      >
+        ←
+      </button>
+
+      {/* RIGHT BUTTON */}
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white px-4 py-2 rounded-full"
+      >
+        →
+      </button>
+    </section>
   );
 }
