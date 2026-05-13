@@ -70,25 +70,47 @@ export default function Home() {
 
 
 function FullscreenSlider() {
-  const images = ["/bg1.png", "/bg2.png", "/bg3.png", "/bg4.png", "/bg5.png"];
+  const baseImages = ["/bg1.png", "/bg2.png", "/bg3.png", "/bg4.png", "/bg5.png"];
+
+  // เพิ่มภาพแรกซ้ำท้ายสุดเพื่อทำ loop
+  const images = [...baseImages, baseImages[0]];
+
   const [index, setIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(true);
+
   const startX = useRef(0);
 
   const next = () => {
-    setIndex((prev) => (prev + 1) % images.length);
+    setIndex((prev) => prev + 1);
+    setIsTransitioning(true);
   };
 
   const prev = () => {
-    setIndex((prev) => (prev - 1 + images.length) % images.length);
+    if (index === 0) return; // ไม่ให้ย้อน
+    setIndex((prev) => prev - 1);
+    setIsTransitioning(true);
   };
 
-  // Auto slide
+  // Auto Slide
   useEffect(() => {
     const interval = setInterval(next, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  // Touch swipe
+  // หากถึงภาพ clone → รีเซ็ตแบบไม่กระตุก
+  useEffect(() => {
+    if (index === images.length - 1) {
+      // รอ transition จบ
+      const timeout = setTimeout(() => {
+        setIsTransitioning(false);
+        setIndex(0); // รีเซ็ตกลับภาพแรก
+      }, 700); // ต้องเท่ากับ transition duration
+
+      return () => clearTimeout(timeout);
+    }
+  }, [index]);
+
+  // Touch Swipe
   const onTouchStart = (e) => {
     startX.current = e.touches[0].clientX;
   };
@@ -97,34 +119,35 @@ function FullscreenSlider() {
     const endX = e.changedTouches[0].clientX;
     const diff = startX.current - endX;
 
-    if (diff > 50) next();
-    if (diff < -50) prev();
+    if (diff > 50) next();    // Swipe Left
+    if (diff < -50) prev();   // Swipe Right
   };
 
   return (
     <section
-      className="relative w-full h-screen overflow-hidden bg-black"
+      className="relative w-full h-screen bg-black overflow-hidden select-none"
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* Slide Track */}
+      {/* Slide track */}
       <div
-        className="flex w-full h-full transition-transform duration-[700ms] ease-out"
+        className="flex w-full h-full"
         style={{
           transform: `translateX(-${index * 100}%)`,
+          transition: isTransitioning ? "transform 0.7s ease-out" : "none",
         }}
       >
         {images.map((src, i) => (
-          <div key={i} className="w-full h-full flex-shrink-0 flex justify-center items-center">
-            <img
-              src={src}
-              className="w-full h-full object-contain select-none"
-            />
+          <div
+            key={i}
+            className="w-full h-full flex-shrink-0 flex justify-center items-center"
+          >
+            <img src={src} className="w-full h-full object-contain" />
           </div>
         ))}
       </div>
 
-      {/* LEFT BUTTON */}
+      {/* LEFT button */}
       <button
         onClick={prev}
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white px-4 py-2 rounded-full"
@@ -132,7 +155,7 @@ function FullscreenSlider() {
         ←
       </button>
 
-      {/* RIGHT BUTTON */}
+      {/* RIGHT button */}
       <button
         onClick={next}
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white px-4 py-2 rounded-full"
@@ -142,4 +165,5 @@ function FullscreenSlider() {
     </section>
   );
 }
+
 
